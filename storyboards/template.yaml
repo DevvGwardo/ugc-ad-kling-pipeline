@@ -1,0 +1,94 @@
+# =============================================================================
+# UGC Ad Storyboard — KLing Pipeline
+# =============================================================================
+# Fill in the fields below, then run:
+#   python scripts/storyboard_to_kling.py storyboards/my_ad.yaml
+#
+# Fields marked [[...]] are placeholders — replace with your content.
+
+ad:
+  product_name: "[[YOUR_PRODUCT_NAME]]"
+  niche: "fintech | dev-tools | saas | productivity"
+  # slug from: dollar-timeframe | anti-hook | income-threshold | confessional | stakes-fear | humblebrag | chaos-order
+  pattern_slug: "dollar-timeframe"
+  target_audience: "freelancers / solo devs / small biz owners"
+  hook_copy: "The headline hook that appears in scene 1"
+
+scenes:
+  - id: hook
+    script: "The exact line displayed in this scene"
+    duration_secs: 2
+    kling_mode: "imagegen"              # imagegen | text2video | image2video
+    kling_model: "kling-v2-1"
+    image_prompt: "Detailed prompt describing what to generate. Be specific about aesthetic, colors, mood, and layout. 9:16 vertical."
+    motion_prompt: ""                   # only for image2video — motion to ADD
+    aspect_ratio: "9:16"
+    mode: "std"                         # std | pro
+    duration: "5"                       # 5 | 10
+    cam_type: "None"                    # None | simple | down_back | forward_up | right_turn_forward | left_turn_forward
+    cam_config: "zoom"                  # horizontal | vertical | pan | tilt | roll | zoom
+    cam_value: 0.5
+    cfg_scale: 0.5
+    text_overlay: ""                    # bold text to overlay (via ffmpeg post)
+
+  - id: problem
+    script: "The pain point — relatable problem statement"
+    duration_secs: 5
+    kling_mode: "image2video"
+    kling_model: "kling-v2-1-master"
+    image_prompt: "Frame prompt: what the starting image looks like"
+    motion_prompt: "Motion prompt: what movement to add — smooth pan, zoom, fade..."
+    aspect_ratio: "9:16"
+    mode: "std"
+    duration: "5"
+    cam_type: "None"
+    cam_config: "zoom"
+    cam_value: 0.5
+    cfg_scale: 0.5
+    text_overlay: ""
+
+  - id: solution
+    script: "The product reveal moment"
+    duration_secs: 5
+    kling_mode: "image2video"
+    kling_model: "kling-v2-1-master"
+    image_prompt: "[[PRODUCT]] interface — clean, modern dashboard or app screenshot"
+    motion_prompt: "UI gracefully fading in, elements sliding into place, smooth professional motion"
+    aspect_ratio: "9:16"
+    mode: "pro"
+    duration: "5"
+    cam_type: "simple"
+    cam_config: "zoom"
+    cam_value: 0.3
+    cfg_scale: 0.5
+    text_overlay: ""
+
+  - id: cta
+    script: "Link in bio — soft close"
+    duration_secs: 3
+    kling_mode: "text2video"
+    kling_model: "kling-v2-1-master"
+    image_prompt: ""
+    motion_prompt: ""
+    aspect_ratio: "9:16"
+    mode: "std"
+    duration: "5"
+    cam_type: "None"
+    cam_config: ""
+    cam_value: 0.0
+    cfg_scale: 0.5
+    text_overlay: "Link in bio — no pressure"
+
+# --- Voiceover (optional) ---
+voiceover:
+  enabled: false
+  mode: "lipsync"                     # lipsync | text2audio
+  voice_id: "Sunny"                   # see KLing node for full voice list
+  voice_language: "en"
+  voice_speed: 1.0
+
+# --- Output ---
+output:
+  filename: "ugc_ad_final.mp4"
+  caption_style: "white_black_stroke"
+  caption_position: "upper_third"
